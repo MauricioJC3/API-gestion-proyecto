@@ -1,0 +1,24 @@
+meta {
+  name: Actualizar
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:8000/api/tasks/1
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{Token}}
+}
+
+body:json {
+  {
+      "name": "Implementar autenticación mejorada",
+      "description": "Añadir autenticación de dos factores",
+      "due_date": "2024-07-15",
+      "completed": false
+  }
+}

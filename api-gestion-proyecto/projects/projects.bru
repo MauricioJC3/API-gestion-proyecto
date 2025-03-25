@@ -1,0 +1,22 @@
+meta {
+  name: projects
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8000/api/projects
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 1|OV9RwFcYO4BNB2JOWeQIJhwBKENkdptYrqp13GH70c7421c3
+}
+
+body:json {
+  {
+    "name": "Proyecto de Ejemplo",
+    "description": "Un proyecto para probar la API"
+  }
+}

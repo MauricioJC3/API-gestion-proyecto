@@ -1,0 +1,22 @@
+meta {
+  name: actualizar-etiqueta
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://localhost:8000/api/tags/1
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{Token}}
+}
+
+body:json {
+  {
+      "name": "Backend Updated",
+      "color": "#e74c3c"
+  }
+}

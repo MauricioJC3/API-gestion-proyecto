@@ -1,0 +1,15 @@
+meta {
+  name: marcar-tarea-completa
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:8000/api/tasks/1/complete
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{Token}}
+}

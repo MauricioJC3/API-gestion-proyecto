@@ -1,0 +1,23 @@
+meta {
+  name: crear-etiqueta
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8000/api/tags
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{Token}}
+}
+
+body:json {
+  {
+      "project_id": 1,
+      "name": "Frontend",
+      "color": "#3498db"
+  }
+}

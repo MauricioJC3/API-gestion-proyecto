@@ -1,0 +1,15 @@
+meta {
+  name: listar-etiquetas
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:8000/api/projects/1/tags
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{Token}}
+}
