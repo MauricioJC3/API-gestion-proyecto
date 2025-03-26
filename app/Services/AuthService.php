@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Interfaces\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthService
@@ -35,12 +36,13 @@ class AuthService
         ];
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        if (Auth::check()) {
-            Auth::user()->tokens()->delete();
-            return true;
-        }
-        return false;
+        // Revoke the current user's token
+        $request->user()->currentAccessToken()->delete();
+    
+        return response()->json([
+            'message' => 'Successfully logged out',
+        ]);
     }
 }
