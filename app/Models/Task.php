@@ -12,8 +12,8 @@ class Task extends Model
     protected $fillable = ['tag_id', 'name', 'description', 'completed', 'priority', 'start_date', 'due_date'];
 
     protected $casts = [
-        'start_date' => 'datetime',
-        'due_date' => 'datetime',
+        'start_date' => 'datetime:Y-m-d H:i:s',
+        'due_date' => 'datetime:Y-m-d H:i:s',
         'completed' => 'boolean',
         'priority' => 'string'
     ];
@@ -27,4 +27,6 @@ class Task extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    
 }
