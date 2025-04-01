@@ -31,10 +31,12 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'tag_id' => 'required|exists:tags,id',
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'due_date' => 'nullable|date',
+        'tag_id' => 'required|exists:tags,id',
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'priority' => 'nullable|in:low,medium,high',
+        'start_date' => 'nullable|date_format:Y-m-d H:i:s',
+        'due_date' => 'nullable|date_format:Y-m-d H:i:s|after_or_equal:start_date',
         ]);
 
         if ($validator->fails()) {
@@ -42,7 +44,7 @@ class TaskController extends Controller
         }
 
         $task = $this->taskService->createTask(
-            $request->only('tag_id', 'name', 'description', 'due_date'),
+            $request->only('tag_id', 'name', 'description', 'priority', 'start_date', 'due_date'),
             $request->user()->id
         );
 
@@ -57,8 +59,10 @@ class TaskController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'due_date' => 'nullable|date',
             'completed' => 'nullable|boolean',
+            'priority' => 'nullable|in:low,medium,high',
+            'start_date' => 'nullable|date_format:Y-m-d H:i:s',
+            'due_date' => 'nullable|date_format:Y-m-d H:i:s|after_or_equal:start_date',
         ]);
 
         if ($validator->fails()) {
@@ -67,7 +71,7 @@ class TaskController extends Controller
 
         $task = $this->taskService->updateTask(
             $id,
-            $request->only('name', 'description', 'due_date', 'completed'),
+            $request->only('name', 'description', 'priority', 'completed', 'start_date', 'due_date'),
             $request->user()->id
         );
 

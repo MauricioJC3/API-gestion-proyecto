@@ -8,8 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'user_id',
+        'name',
+        'description',
+        'status',
+        'start_date',
+        'due_date'
+    ];
 
-    protected $fillable = ['user_id', 'name', 'description', 'status'];
+    protected $casts = [
+        'start_date' => 'datetime',
+        'due_date' => 'datetime',
+        'status' => 'string'
+    ];
 
     public function user()
     {

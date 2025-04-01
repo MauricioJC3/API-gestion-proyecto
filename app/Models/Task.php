@@ -9,11 +9,13 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['tag_id', 'name', 'description', 'due_date', 'completed'];
+    protected $fillable = ['tag_id', 'name', 'description', 'completed', 'priority', 'start_date', 'due_date'];
 
     protected $casts = [
+        'start_date' => 'date',
         'due_date' => 'date',
         'completed' => 'boolean',
+        'priority' => 'string'
     ];
 
     public function tag()

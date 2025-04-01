@@ -16,8 +16,10 @@ return new class extends Migration
             $table->foreignId('tag_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('description')->nullable();
-            $table->date('due_date')->nullable();
             $table->boolean('completed')->default(false);
+            $table->enum('priority', ['low', 'medium', 'high']);
+            $table->dateTime('start_date')->nullable(); // Fecha de inicio de la tarea
+            $table->dateTime('due_date')->nullable(); // Fecha límite de la tarea
             $table->timestamps();
         });
     }

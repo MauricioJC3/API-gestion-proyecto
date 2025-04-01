@@ -34,6 +34,8 @@ class ProjectController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'status' => 'nullable|string',
+            'start_date' => 'nullable|date_format:Y-m-d H:i:s',
+            'due_date' => 'nullable|date_format:Y-m-d H:i:s|after_or_equal:start_date',
         ]);
 
         if ($validator->fails()) {
@@ -41,7 +43,7 @@ class ProjectController extends Controller
         }
 
         $project = $this->projectService->createProject(
-            $request->only('name', 'description', 'status'),
+            $request->only('name', 'description', 'status', 'start_date', 'due_date'),
             $request->user()->id
         );
 
@@ -57,6 +59,8 @@ class ProjectController extends Controller
             'name' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'status' => 'nullable|string',
+            'start_date' => 'nullable|date_format:Y-m-d H:i:s',
+            'due_date' => 'nullable|date_format:Y-m-d H:i:s|after_or_equal:start_date',
         ]);
 
         if ($validator->fails()) {
@@ -65,7 +69,7 @@ class ProjectController extends Controller
 
         $project = $this->projectService->updateProject(
             $id,
-            $request->only('name', 'description', 'status'),
+            $request->only('name', 'description', 'status', 'start_date', 'due_date'),
             $request->user()->id
         );
 

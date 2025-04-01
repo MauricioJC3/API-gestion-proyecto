@@ -11,12 +11,15 @@ post {
 }
 
 auth:bearer {
-  token: 1|OV9RwFcYO4BNB2JOWeQIJhwBKENkdptYrqp13GH70c7421c3
+  token: {{Token}}
 }
 
 body:json {
   {
     "name": "Proyecto de Ejemplo",
-    "description": "Un proyecto para probar la API"
+    "description": "Un proyecto para probar la API",
+    "start_date": "2025-04-01 09:00:00",
+    "due_date": "2025-04-10 18:00:00"
   }
+  
 }

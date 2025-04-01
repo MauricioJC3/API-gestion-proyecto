@@ -16,7 +16,9 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('description')->nullable();
-            $table->string('status')->default('active'); // active, archived, etc.
+            $table->enum('status', ['active', 'inactive']);
+            $table->dateTime('start_date')->nullable(); // Fecha de inicio del proyecto
+            $table->dateTime('due_date')->nullable(); // Fecha límite del proyecto
             $table->timestamps();
         });
     }
