@@ -3,9 +3,13 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\Kamban\BoardController;
+use App\Http\Controllers\API\Kamban\ColumnController;
 use App\Http\Controllers\API\ProjectController;
 use App\Http\Controllers\API\TagController;
 use App\Http\Controllers\API\TaskController;
+
+
 
 // Rutas públicas
 Route::post('register', [AuthController::class, 'register']);
@@ -33,4 +37,19 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('tasks/{id}', [TaskController::class, 'destroy']);
     Route::post('tasks/{id}/complete', [TaskController::class, 'complete']);
     Route::post('tasks/{id}/assign', [TaskController::class, 'assign']);
+
+        // 📌 Rutas del Tablero Kanban
+       Route::post('boards', [BoardController::class, 'store']);
+       Route::get('boards', [BoardController::class, 'index']);
+       Route::get('boards/{id}', [BoardController::class, 'show']);
+       Route::put('boards/{id}', [BoardController::class, 'update']);
+       Route::delete('boards/{id}', [BoardController::class, 'destroy']);
+   
+       // Rutas de Columnas dentro de un Tablero
+       Route::post('boards/{board_id}/columns', [ColumnController::class, 'store']);
+       Route::get('boards/{board_id}/columns', [ColumnController::class, 'index']);
+       Route::get('boards/{board_id}/columns/{id}', [ColumnController::class, 'show']);
+       Route::put('boards/{board_id}/columns/{id}', [ColumnController::class, 'update']);
+       Route::delete('boards/{board_id}/columns/{id}', [ColumnController::class, 'destroy']);
+        
 });

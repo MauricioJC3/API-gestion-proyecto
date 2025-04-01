@@ -1,0 +1,24 @@
+meta {
+  name: columna
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8000/api/boards/1/columns
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{Token}}
+}
+
+body:json {
+  {
+      "name": "Columna de Ejemplo4",
+      "position": 4,
+      "board_id": 1
+  }
+  
+}
