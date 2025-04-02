@@ -1,0 +1,28 @@
+meta {
+  name: kanban-task
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8000/api/kanban-tasks
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{Token}}
+}
+
+body:json {
+  {
+      "column_id": 1,
+      "title": "Desarrollar API de autenticación",
+      "description": "Implementar login y registro con Laravel Sanctum",
+      "position": 1,
+      "completed": false,
+      "start_date": "2025-04-03 08:00:00",
+      "due_date": "2025-04-03 08:30:00"
+  }
+  
+}

@@ -15,4 +15,16 @@ class Column extends Model
     {
         return $this->belongsTo(Board::class);
     }
+
+    public function tasks()
+    {
+        return $this->hasMany(KanbanTask::class, 'column_id');
+    }
+
+    public function tags()
+    {
+        return $this->hasMany(KanbanTag::class, 'board_id', 'board_id');
+    }
+
+
 }

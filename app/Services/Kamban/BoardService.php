@@ -23,6 +23,7 @@ class BoardService
     {
         return $this->boardRepository->getById($id);
     }
+    
 
     public function createBoard(array $data)
     {

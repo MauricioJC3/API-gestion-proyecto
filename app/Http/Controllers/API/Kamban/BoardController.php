@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\Kamban;
 
 use App\Http\Controllers\Controller;
+use App\Models\Board;
 use App\Services\Kamban\BoardService;
 
 use Illuminate\Http\Request;
@@ -20,6 +21,12 @@ class BoardController extends Controller
     {
         return response()->json($this->boardService->getAllBoards());
     }
+
+    public function showDetails($boardId)
+    {
+        return response()->json($this->boardService->getBoardById($boardId));
+    }
+    
 
     public function store(Request $request)
     {

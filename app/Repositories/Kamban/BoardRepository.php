@@ -14,8 +14,9 @@ class BoardRepository implements BoardRepositoryInterface
 
     public function getById($id)
     {
-        return Board::findOrFail($id);
+        return Board::with(['columns.tasks', 'columns.tags'])->findOrFail($id);
     }
+    
 
     public function create(array $data)
     {

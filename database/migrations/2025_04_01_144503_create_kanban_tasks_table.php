@@ -18,7 +18,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->integer('position')->default(0); // Orden dentro de la columna
             $table->boolean('completed')->default(false);
-            $table->dateTime('due_date')->nullable();
+            $table->dateTime('start_date')->nullable(); // Nueva fecha de inicio
+            $table->dateTime('due_date')->nullable();  // Fecha límite
             $table->timestamps();
         });
         
