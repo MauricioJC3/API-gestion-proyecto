@@ -29,4 +29,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Task::class);
     }
+    
+    public function boards()
+    {
+        return $this->hasMany(Board::class);
+    }
 }

@@ -11,12 +11,23 @@ class BoardRepository implements BoardRepositoryInterface
     {
         return Board::all();
     }
+    
+    public function getAllForUser($userId)
+    {
+        return Board::where('user_id', $userId)->get();
+    }
 
     public function getById($id)
     {
         return Board::with(['columns.tasks', 'columns.tags'])->findOrFail($id);
     }
     
+    public function getByIdForUser($id, $userId)
+    {
+        return Board::with(['columns.tasks', 'columns.tags'])
+            ->where('user_id', $userId)
+            ->findOrFail($id);
+    }
 
     public function create(array $data)
     {

@@ -5,8 +5,8 @@ namespace App\Http\Controllers\API\Kamban;
 use App\Http\Controllers\Controller;
 use App\Models\Board;
 use App\Services\Kamban\BoardService;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BoardController extends Controller
 {
@@ -19,32 +19,39 @@ class BoardController extends Controller
 
     public function index()
     {
-        return response()->json($this->boardService->getAllBoards());
+        $userId = Auth::id();
+        return response()->json($this->boardService->getAllBoardsForUser($userId));
     }
 
     public function showDetails($boardId)
     {
-        return response()->json($this->boardService->getBoardById($boardId));
+        $userId = Auth::id();
+        return response()->json($this->boardService->getBoardByIdForUser($boardId, $userId));
     }
     
-
     public function store(Request $request)
     {
-        return response()->json($this->boardService->createBoard($request->all()), 201);
+        $data = $request->all();
+        $data['user_id'] = Auth::id();
+        
+        return response()->json($this->boardService->createBoard($data), 201);
     }
 
     public function show($id)
     {
-        return response()->json($this->boardService->getBoardById($id));
+        $userId = Auth::id();
+        return response()->json($this->boardService->getBoardByIdForUser($id, $userId));
     }
 
     public function update(Request $request, $id)
     {
-        return response()->json($this->boardService->updateBoard($id, $request->all()));
+        $userId = Auth::id();
+        return response()->json($this->boardService->updateBoardForUser($id, $userId, $request->all()));
     }
 
     public function destroy($id)
     {
-        return response()->json($this->boardService->deleteBoard($id));
+        $userId = Auth::id();
+        return response()->json($this->boardService->deleteBoardForUser($id, $userId));
     }
 }
